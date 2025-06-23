@@ -1,0 +1,340 @@
+/* src/pages/Home/Home.module.css (Ukuran Kartu Skill Diperbesar) */
+
+.homeSection { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding-top: 80px; padding-bottom: 20px; color: white; text-align: center; box-sizing: border-box; position: relative; overflow-x: hidden; }
+.homeContent { width: 100%; margin-left: auto; margin-right: auto; padding-top: 20px; padding-bottom: 20px; margin-bottom: 120px; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.headingPrimary { font-size: 3.5em; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
+.highlightName { color: #673ab7; }
+.headingSecondary { font-size: 2.5em; font-weight: 600; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+.rotatingTextMain { font-weight: 700; color: white; background-color: #673ab7; padding: 8px 15px; border-radius: 10px; display: inline-flex; justify-content: center; align-items: center; overflow: hidden; height: 1.2em; line-height: 1.2em; text-transform: uppercase; }
+.shortDescription { font-size: 1.1em; color: #ccc; margin-bottom: 40px; line-height: 1.6; max-width: 800px; }
+.buttonsContainer { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.seeMoreButton, .contactMeButton { padding: 15px 30px; border-radius: 30px; border: 2px solid #673ab7; text-decoration: none; font-weight: 600; font-size: 1.1em; transition: all 0.5s ease; white-space: nowrap; }
+.seeMoreButton { background-color: #683ab700; color: white; border: 2px solid #673ab7; }
+.seeMoreButton:hover { background-color: white; color: #1a1a1a; transform: translateY(-3px); }
+.contactMeButton { background-color: #673ab7; color: white; border: 2px solid #673ab7; }
+.contactMeButton:hover { background-color: #4527a0; border-color: #4527a0; transform: translateY(-3px); }
+.aboutSection, .skillsSection, .projectsSection, .contactSection { min-height: 80vh;  padding-top: 80px; padding-bottom: 80px;  display: flex; flex-direction: column; align-items: center; text-align: center; box-sizing: border-box; color: #fffefe;  background-color: transparent; overflow-x: hidden; position: relative; z-index: 2; }
+.aboutContent, .skillsContent, .projectsContent, .contactContent { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2;  }
+.sectionHeading { font-size: 3em; font-weight: 700; margin-bottom: 40px; position: relative; z-index: 3; color: #673ab7;  }
+.sectionText { font-size: 1.1em; line-height: 1.6; max-width: 800px; margin-bottom: 20px; color: #ffffff; }
+.aboutLayout { display: flex; align-items: center; gap: 60px; width: 100%; margin-top: 40px; }
+.profileCardContainer { flex: 0 0 350px; display: flex; justify-content: center; }
+.aboutDescription { flex: 1 1 auto; text-align: left; }
+.aboutSocialLinks { display: flex; gap: 1.5rem; margin-top: 2rem; }
+.aboutDescription .aboutSocialLinks { justify-content: flex-start; }
+.aboutSocialLinks a { color: #ccc; font-size: 1.75rem; transition: all 0.3s ease; line-height: 1; }
+.aboutSocialLinks a:hover { color: #673ab7; transform: scale(1.1) translateY(-3px); }
+
+/* GAYA BARU UNTUK SECTION CONTACT */
+.contactHeader { text-align: center; margin-bottom: 4rem; }
+.contactSubtitle { color: #673ab7; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.contactTitle { font-size: clamp(2.5rem, 6vw, 4rem); color: #fff; margin: 0.5rem 0 1rem 0; }
+.contactDescription { max-width: 600px; margin: 0 auto; color: #ccc; font-size: 1.1rem; line-height: 1.7; }
+
+.contactLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid #444;
+}
+
+/* DITAMBAHKAN: Gaya untuk wadah peta */
+.contactVisual {
+  width: 100%;
+  height: 100%;
+  min-height: 350px; /* Beri tinggi minimum agar peta terlihat */
+  border-radius: 8px;
+  overflow: hidden; /* Sembunyikan border default dari iframe */
+}
+.contactVisual iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: invert(90%) grayscale(80%); /* Efek gaya agar peta sesuai tema gelap */
+}
+
+.contactInfo { display: flex; flex-direction: column; gap: 2rem; }
+.contactItem { display: flex; align-items: center; gap: 1.5rem; }
+.contactIconWrapper { background-color: rgba(103, 58, 183, 0.1); color: #673ab7; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; flex-shrink: 0; }
+.contactText h4 { margin: 0 0 0.25rem 0; color: #aaa; font-size: 0.9rem; text-transform: uppercase; }
+.contactText a, .contactText span { color: #f0f0f0; font-size: 1.2rem; font-weight: 500; text-decoration: none; transition: color 0.2s ease; }
+.contactText a:hover { color: #673ab7; }
+
+/* --- GAYA FINAL UNTUK SKILLS SECTION --- */
+.filterButtons { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.filterButton { background-color: transparent; color: #ccc; border: 2px solid #444; padding: 0.75rem 1.5rem; border-radius: 30px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; }
+.filterButton:hover { background-color: #444; color: white; }
+.filterButton.activeFilter { background-color: #673ab7; border-color: #673ab7; color: white; box-shadow: 0 0 15px rgba(103, 58, 183, 0.5); }
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.skillCard {
+  /* DIUBAH: Menetapkan tinggi yang tetap untuk semua kartu */
+  height: 250px; 
+  background-color: transparent;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.skillCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Inner container mengisi tinggi dari .skillCard */
+  transform-style: preserve-3d;
+}
+
+.skillCardFront,
+.skillCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%; /* Kedua sisi kartu mengisi tinggi dari .skillCardInner */
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  display: flex;
+  padding: 2rem;
+  background-color: #4e4e4e26;
+  border-radius: 10px;
+  border: 1px solid #ffffff27;
+  box-sizing: border-box;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+}
+
+.skillCardFront {
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.skillCardBack {
+  transform: rotateY(180deg);
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center; /* Konten di belakang akan center secara vertikal */
+  gap: 0.5rem;
+  padding: 1.5rem 2rem;
+}
+
+.skillCardBackTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.skillDetailsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.skillDetailsList li {
+  margin-bottom: 0.5rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.skillDetailsList li strong {
+  color: #fff;
+}
+
+.skillIcon {
+  font-size: 3.5rem;
+  flex-shrink: 0;
+}
+
+.skillInfo {
+  width: 100%;
+}
+
+.skillName {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 1.75rem;
+  background-color: #1a1a1a;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid #444;
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.75rem;
+  box-sizing: border-box;
+}
+
+.progressBar span {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* --- GAYA UNTUK PROJECT SECTION --- */
+.projectGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; width: 100%;}
+.projectCard { height: 350px; border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; box-shadow: 0px 5px 20px rgba(0,0,0,0.2); background-color: #2a2a2a1a; border: 1px solid #444; }
+.projectImage { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.4s ease-out; }
+.projectCard:hover .projectImage { transform: scale(1.05); }
+.projectCard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0) 70%); z-index: 1; }
+.projectCardContent { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; color: white; z-index: 2; transform: translateY(30px); opacity: 0; transition: all 0.4s ease-out; }
+.projectCard:hover .projectCardContent { transform: translateY(0); opacity: 1; }
+.projectTitle { font-size: 1.6em; font-weight: 700; line-height: 1.2; margin: 0 0 0.5rem 0; }
+.projectTech { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.projectTech span { background-color: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: 500; }
+
+/* Sisa CSS lainnya */
+.emailLink { font-size: 1.5em; color: #673ab7; text-decoration: none; font-weight: 600; margin-top: 20px; display: inline-block; transition: color 0.3s ease; }
+.emailLink:hover { color: #4527a0; }
+.greetingSection { padding: 40px 0; overflow: hidden; position: relative; z-index: 2; }
+.greetingText { color: #cccccc; font-weight: 600; }
+.text-block { font-family: 'Source Code Pro', monospace; font-size: 1.1em; line-height: 1.7; color: #ffffff; text-align: left; white-space: pre-wrap;  }
+.text-block p { margin: 0; }
+.char { will-change: transform; display: inline-block; }
+
+@media (max-width: 992px) {
+  .aboutLayout { flex-direction: column; gap: 40px; }
+  .aboutDescription { text-align: center; }
+  .aboutDescription .aboutSocialLinks { justify-content: center; }
+  .contactLayout {
+    grid-template-columns: 1fr; 
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .contactVisual {
+    min-height: 250px; 
+    order: 2; 
+  }
+  .contactInfo {
+    order: 1;
+  }
+}
+@media (max-width: 768px) {
+  .homeSection, .aboutSection, .skillsSection, .projectsSection, .contactSection { padding-top: 100px; padding-bottom: 20px; }
+  .headingPrimary { font-size: 2.5em; white-space: normal; }
+  .headingSecondary { font-size: 1.8em; flex-direction: column; gap: 5px; }
+  .rotatingTextMain { font-size: 1em; padding: 6px 12px; }
+  .shortDescription { font-size: 1em; padding: 0 10px; }
+  .buttonsContainer { flex-direction: column; align-items: center; }
+  .sectionHeading { font-size: 2em; }
+  .sectionText { font-size: 0.95em; padding: 0 10px; }
+  .skillsGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .headingPrimary { font-size: 2em; }
+  .headingSecondary { font-size: 1.5em; }
+  .rotatingTextMain { font-size: 0.9em; }
+  .buttonsContainer { gap: 10px; }
+  .seeMoreButton, .contactMeButton { padding: 12px 25px; font-size: 1em; }
+  .sectionHeading { font-size: 1.8em; }
+  .filterButtons { gap: 0.5rem; }
+  .filterButton { padding: 0.5rem 1rem; font-size: 0.9rem; }
+}
+@media (min-width: 992px) {
+  .text-block { text-align: justify; text-justify: inter-word; }
+}
+
+/* Tambahkan atau ubah bagian ini untuk memperbaiki tata letak dan responsivitas */
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  line-height: 1.4;
+}
+
+.contactText h4 {
+  margin: 0;
+  color: #aaa;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contactText a,
+.contactText span {
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.contactText a:hover {
+  color: #673ab7;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .contactTitle {
+    font-size: 2rem;
+  }
+
+  .contactDescription {
+    font-size: 1rem;
+  }
+
+  .contactLayout {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .contactIconWrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .contactText a,
+  .contactText span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .contactTitle {
+    font-size: 1.6rem;
+  }
+
+  .contactDescription {
+    font-size: 0.95rem;
+  }
+
+  .contactVisual iframe {
+    min-height: 200px;
+  }
+
+  .contactItem {
+    gap: 1rem;
+  }
+}

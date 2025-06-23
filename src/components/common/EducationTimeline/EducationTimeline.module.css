@@ -1,0 +1,178 @@
+/* src/components/common/EducationTimeline/EducationTimeline.module.css (Alignment Dinamis) */
+
+.educationSection {
+  padding: 6rem 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;;
+}
+
+.sectionHeading {
+  text-align: center;
+  font-size: clamp(2.2rem, 3vw, 3.2rem);
+  font-weight: 800;
+  margin-bottom: 4rem;
+  color: #ffffff9f;
+  justify-content: center;
+}
+
+.timelineContainer {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.timelineContainer::after {
+  content: '';
+  position: absolute;
+  width: 0.25rem;
+  background-color: #4a4a4a;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -0.125rem;
+  border-radius: 0.125rem;
+  transition: left 0.4s ease;
+}
+
+.timelineItem {
+  padding: 1rem 2.5rem; /* Menambah padding vertikal untuk memberi ruang */
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  
+  /* --- PERUBAHAN UTAMA: Menjadikannya kontainer flex --- */
+  display: flex;
+  align-items: center; /* Menengahkan konten secara vertikal */
+}
+
+.timelineItem:nth-child(odd) {
+  left: 0;
+  /* Mendorong konten ke ujung kanan (mendekati garis tengah) */
+  justify-content: flex-end; 
+}
+
+.timelineItem:nth-child(even) {
+  left: 50%;
+  justify-content: flex-start; /* Default, konten di awal (dekat garis tengah) */
+}
+
+.timelineItem::after {
+  content: '';
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  right: -0.75rem;
+  background-color: #1f1f1f37;
+  border: 0.25rem solid #4a4a4a;
+  
+  /* --- PERUBAHAN UTAMA: Posisi vertikal dinamis --- */
+  top: 50%;
+  transform: translateY(-50%); /* Trik untuk center vertikal sempurna */
+
+  border-radius: 50%;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.timelineItem:nth-child(even)::after {
+  left: -0.75rem;
+}
+
+.timelineItem.isVisible::after {
+  transform: scale(1.1) translateY(-50%); /* Jaga transform Y */
+  background-color: #8e44ad;
+  border-color: #a464c8;
+  box-shadow: 0 0 1.25rem rgba(174, 100, 200, 0.8);
+}
+
+.timelineContent {
+  padding: 1.25rem 1.875rem;
+  background-color: #36363652;
+  position: relative;
+  border-radius: 0.5rem;
+  border: 1px solid #444;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Pastikan konten mengisi ruang yang tersedia */
+  max-width: 400px; /* Batasi lebar maksimum kartu */
+}
+
+.timelineItem:hover .timelineContent {
+  transform: scale(1.02);
+  box-shadow: 0 0 1.5rem rgba(0,0,0,0.3);
+}
+
+.timelineContent.left {
+  text-align: right;
+}
+
+.timelineContent.right {
+  text-align: left;
+}
+
+.level {
+  color: #673ab7;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.school {
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+  color: #f0f0f0;
+}
+
+.year {
+  color: #aaa;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.description {
+  margin-top: 0.625rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+
+/* ======================================= */
+/* === VERSI MOBILE (TABLET & HP) === */
+/* ======================================= */
+
+@media screen and (max-width: 768px) {
+  .timelineContainer::after {
+    left: 2rem;
+  }
+
+  .timelineItem {
+    width: 100%;
+    left: 0;
+    padding-left: 3.5rem;
+    padding-right: 1rem;
+    /* Mendorong konten ke kiri di mobile */
+    justify-content: flex-start;
+  }
+  .timelineItem:nth-child(even) {
+    left: 0;
+  }
+
+  .timelineItem::after {
+    left: 1.125rem;
+    right: auto;
+  }
+
+  .timelineContent.left, .timelineContent.right {
+    text-align: left;
+  }
+
+  .school {
+    font-size: 1.2rem;
+  }
+  .description {
+    font-size: 0.95rem;
+  }
+}

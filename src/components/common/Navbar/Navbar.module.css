@@ -1,0 +1,147 @@
+/* src/components/common/Navbar/Navbar.module.css (Hamburger Diperbarui) */
+
+/* -- WADAH UTAMA NAVBAR -- */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem 0;
+  background: transparent; 
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+}
+
+.navbar.scrolled {
+  background-color: rgba(26, 26, 26, 0);
+  padding: 0.9rem 0;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navLeft { flex: 1; display: flex; }
+.logoImage { height: 3.125rem; width: auto; }
+
+.navCenter { display: flex; justify-content: center; }
+.navLinks {
+  list-style: none;
+  display: flex;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease;
+}
+.navbar.scrolled .navLinks {
+  background-color: rgba(255, 255, 255, 0.073);
+}
+.navLinks li { margin: 0 1rem; }
+.navLinks li a { color: #ccc; text-decoration: none; font-weight: 500; transition: color 0.3s ease; position: relative; padding: 0.5rem; }
+.navLinks li a::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background-color: #673ab7; transition: width 0.3s ease-out; }
+.navLinks li a:hover, .navLinks li a.activeLink { color: white; }
+.navLinks li a:hover::after, .navLinks li a.activeLink::after { width: 50%; }
+
+.navRight { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+.contactLink { background-color: #673ab7; color: white !important; padding: 0.625rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+.contactLink:hover { background-color: #512da8; transform: translateY(-2px); }
+
+
+/* ================================================= */
+/* ===== GAYA HAMBURGER BARU (Tiga Garis ke X) ===== */
+/* ================================================= */
+
+.hamburger {
+  display: none; /* Default tersembunyi di desktop */
+  width: 30px;
+  height: 24px; /* Sesuaikan tinggi untuk 3 garis */
+  cursor: pointer;
+  z-index: 1200;
+  position: relative;
+}
+
+.bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Posisi awal 3 garis */
+.bar:nth-child(1) {
+  top: 0;
+}
+.bar:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.bar:nth-child(3) {
+  bottom: 0;
+}
+
+/* Animasi saat menu terbuka */
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* ================================================= */
+/* ============= TAMPILAN RESPONSIVE =============== */
+/* ================================================= */
+@media (max-width: 992px) {
+  .navCenter, .contactButtonContainer {
+    display: none;
+  }
+  .hamburger {
+    display: block; /* Tampilkan hamburger di mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .logoImage { height: 45px; }
+}
+
+/* -- MENU MOBILE SAAT TERBUKA -- */
+.mobileNavWrapper { 
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1150; gap: 40px; 
+}
+.mobileNavLinks { 
+  list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; text-align: center; align-items: center; 
+}
+.mobileNavLinks li { 
+  margin: 20px 0; 
+}
+.mobileNavLinks li a { 
+  font-size: 2em; font-weight: 600; color: #dbdbdb; text-decoration: none; position: relative; overflow: hidden; padding: 5px; 
+}
+.mobileNavLinks li a::before { 
+  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: linear-gradient(90deg, #673ab7, #8e44ad); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1); 
+}
+.mobileNavLinks li a:hover::before { 
+  width: 100%; 
+}
+.mobileContactButton .contactLink { 
+  font-size: 1.5em; padding: 15px 35px; border: 2px solid #673ab7; background-color: transparent; 
+}
+.mobileContactButton .contactLink:hover { 
+  background-color: #673ab7; 
+}

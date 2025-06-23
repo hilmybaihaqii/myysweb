@@ -1,0 +1,24 @@
+/* src/components/common/ScrambledText/ScrambledText.css */
+.text-block {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #ffffff; /* Warna dibuat lebih terang (abu-abu sangat gelap) */
+}
+
+/* Beri jarak atas pada paragraf kedua dan seterusnya */
+.text-block p + p {
+  margin-top: 1em; 
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+}
+
+@media (min-width: 992px) {
+  .text-block {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}

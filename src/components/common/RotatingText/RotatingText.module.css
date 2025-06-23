@@ -1,0 +1,14 @@
+/* src/components/common/RotatingText/RotatingText.module.css */
+.container {
+  display: inline-flex; /* Agar wadah pas dengan kontennya */
+  position: relative;
+  vertical-align: top; /* Mencegah sedikit pergeseran vertikal */
+}
+
+.inner {
+  display: inline-flex; /* Membuat huruf-huruf berjajar */
+}
+
+.element {
+  display: inline-block; /* Agar bisa dianimasikan */
+}

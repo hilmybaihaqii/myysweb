@@ -1,0 +1,96 @@
+/* src/components/common/Footer/Footer.module.css */
+
+.footer {
+ background-color: #181818;
+ color: #f0f0f0;
+ padding: 4rem 0 1.5rem 0;
+ font-size: 0.9rem;
+ flex-shrink: 0;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center; /* Vertikal align ke tengah agar lebih seimbang */
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+/* Kolom Kiri */
+.footerBrand { justify-self: start; }
+.footerLogo { height: 3rem; width: auto; display: block; }
+
+/* Kolom Tengah */
+.footerQuoteContainer { justify-self: center; text-align: center; max-width: 450px; }
+.footerQuote { font-style: italic; line-height: 1.6; color: #bbb; margin: 0; }
+
+/* Kolom Kanan */
+.footerRightSection { justify-self: end; }
+
+/* STYLING .footerNav TELAH DIHAPUS */
+
+/* Styling untuk Social Media */
+.footerSocial h3 {
+  color: #673ab7;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialIcons a {
+  color: #f0f0f0;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.socialIcons a:hover {
+  color: #673ab7;
+  transform: translateY(-3px);
+}
+
+/* Copyright */
+.footerBottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  color: #aaa;
+}
+
+
+/* ============ BREAKPOINTS ============ */
+
+/* Tablet (iPad Portrait) & di bawahnya */
+@media (max-width: 1024px) {
+  .footerContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .footerQuoteContainer {
+    grid-column: 1 / -1;
+    order: 3;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 80%;
+    justify-self: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+  }
+}
