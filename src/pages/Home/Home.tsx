@@ -255,7 +255,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 <div className={styles.contactText}>
                   <h4>LinkedIn</h4>
-                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">Hilmy Baihaqi</a>
+                  <a href="https://www.linkedin.com/in/hilmy-baihaqi-bb4619283/" target="_blank" rel="noopener noreferrer">Hilmy Baihaqi</a>
                 </div>
               </div>
 
