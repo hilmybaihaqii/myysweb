@@ -1,0 +1,33 @@
+.section {
+  padding: 100px 2rem;
+  background: linear-gradient(45deg, #1a1a1a 0%, #2c2c4c 100%);
+  text-align: center;
+  color: white;
+}
+.content h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.content p {
+  font-size: 1.2rem;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+.ctaButton {
+  background-color: #673ab7;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(103, 58, 183, 0.4);
+}
+.ctaButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(103, 58, 183, 0.6);
+}

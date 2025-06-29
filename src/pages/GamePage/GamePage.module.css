@@ -1,0 +1,141 @@
+/* src/pages/GamePage/GamePage.module.css (Versi Baru yang Lebih Menarik) */
+
+.pageContainer {
+  padding: 5rem 0;
+  color: white;
+  min-height: 80vh;
+  background: #ffffff00;
+}
+
+.selectionContainer h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  /* Efek teks gradasi */
+  background: linear-gradient(90deg, #a77eff, #673ab7, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.selectionContainer > p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #a0aec0; /* Abu-abu kebiruan */
+  margin-bottom: 4rem;
+}
+
+.gameList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+}
+
+.gameCard {
+  background: rgba(255, 255, 255, 0.05); /* Latar belakang transparan */
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.gameCard:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(103, 58, 183, 0.5);
+}
+
+.gameCard h2 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #673ab7;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.gameCard p {
+  color: #cbd5e0;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+.instructions {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: left;
+    font-size: 0.9rem;
+    border-left: 3px solid #673ab7;
+}
+
+.instructions strong {
+    color: #fff;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.gameCard button {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.gameCard button:hover {
+  background-color: #512da8;
+  box-shadow: 0 0 20px rgba(103, 58, 183, 0.7);
+}
+
+.backToHome {
+    display: block; /* Ubah menjadi block agar bisa di-center */
+    width: fit-content;
+    margin: 4rem auto 0 auto;
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+.backToHome:hover {
+    color: #673ab7;
+}
+
+/* Styling saat game aktif */
+.gameActiveContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameHeader {
+    width: 100%;
+    margin-bottom: 2rem;
+    max-width: 800px; /* Samakan dengan lebar game */
+}
+
+.backButton {
+    background: transparent;
+    border: 1px solid #444;
+    color: #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backButton:hover {
+    background-color: #444;
+    color: white;
+}

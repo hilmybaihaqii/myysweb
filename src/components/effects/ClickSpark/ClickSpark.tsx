@@ -167,7 +167,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          zIndex: 5, // DIUBAH: Mengangkat kanvas ke lapisan atas (lebih tinggi dari z-index: 2 milik konten)
+          zIndex: 5,
         }}
       />
       {children}

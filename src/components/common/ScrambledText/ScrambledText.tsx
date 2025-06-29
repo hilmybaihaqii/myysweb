@@ -22,7 +22,7 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
   radius = 100,
   duration = 1.2,
   speed = 0.5,
-  scrambleChars = "<>-_\\/[]{}—=+*^?#________",
+  scrambleChars = ":::::::::::::::::::::::",
   className = "",
   style = {},
   children,

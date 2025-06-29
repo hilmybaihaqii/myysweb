@@ -67,9 +67,9 @@ const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => {
         <div className={styles.skillCardBack}>
           <h3 className={styles.skillCardBackTitle} style={{ color: skill.color }}>{skill.name}</h3>
           <ul className={styles.skillDetailsList}>
-            {skill.details?.experience && <li><strong>Pengalaman:</strong> {skill.details.experience}</li>}
-            {skill.details?.projects && <li><strong>Proyek:</strong> {skill.details.projects}</li>}
-            {skill.details?.focus && <li><strong>Fokus:</strong> {skill.details.focus}</li>}
+            {skill.details?.experience && <li><strong>Experience:</strong> {skill.details.experience}</li>}
+            {skill.details?.projects && <li><strong>Project:</strong> {skill.details.projects}</li>}
+            {skill.details?.focus && <li><strong>Focus:</strong> {skill.details.focus}</li>}
           </ul>
         </div>
       </motion.div>

@@ -1,0 +1,23 @@
+.bug {
+  position: absolute;
+  cursor: pointer;
+  font-size: clamp(24px, 5vw, 32px);
+  transition: transform 0.2s ease-out;
+  animation: bug-appear 0.3s ease-out;
+  user-select: none; /* Agar tidak bisa di-drag */
+}
+
+.bug:hover {
+  transform: scale(1.2);
+}
+
+@keyframes bug-appear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

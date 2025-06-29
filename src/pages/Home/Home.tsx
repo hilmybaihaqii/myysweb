@@ -10,6 +10,9 @@ import ScrollFloat from '../../components/effects/ScrollFloat/ScrollFloat';
 import EducationTimeline from '../../components/common/EducationTimeline/EducationTimeline';
 import SkillCard from '../../components/common/SkillCard/SkillCard';
 import ProjectPopup from '../../components/common/ProjectPopup/ProjectPopup';
+import ClickSpark from '../../components/effects/ClickSpark/ClickSpark';
+
+import GameArcadeSection from '../../components/common/GameArcadeSection/GameArcadeSection';
 
 import { FaInstagram, FaFacebookF, FaLinkedinIn, FaGithub, FaReact, FaNodeJs, FaFigma } from 'react-icons/fa';
 import { SiTypescript, SiJavascript, SiCss3, SiHtml5, SiExpress } from 'react-icons/si';
@@ -62,9 +65,11 @@ const AboutSection: React.FC = () => {
                 duration={1.5}
                 speed={0.3}
               >
-                {`As a web developer, I transform complex ideas into intuitive and elegant digital experiences. Specializing in modern web technologies, my primary focus is on building responsive and seamless interfaces, ensuring every interaction feels natural to the user.
+              {`Hello, I'm Hilmy Baihaqi, a Telecommunication Engineering student at Telkom University with a deep enthusiasm for technology and web development. For me, coding isn't just about writing lines of code, it's about solving problems and creating digital solutions that are both functional and elegant.
 
-I am driven by technical challenges and constantly seek new knowledge in this dynamic industry. I believe collaboration is the key to creating impactful solutions. Let's build something amazing together.`}
+              I have a strong focus on front-end development, with expertise in HTML5, CSS3, JavaScript, as well as modern frameworks like React.js. I thrive on the challenge of transforming complex ideas into intuitive and user-friendly interfaces.
+
+              I am actively seeking opportunities—be it internships or freelance work—to contribute to meaningful projects where I can apply and further develop my skills. Let's collaborate and build something amazing together.`}
               </ScrambledText>
               
               <div className={styles.aboutSocialLinks}>
@@ -104,7 +109,7 @@ const SkillsSection: React.FC = () => {
   return (
     <section id="skills" className={styles.skillsSection}>
       <div className="container">
-        <ScrollFloat containerClassName={styles.sectionHeading} ease='power4.out'>
+        <ScrollFloat containerClassName={styles.sectionHeading}>
           My Skills & Expertise
         </ScrollFloat>
 
@@ -134,12 +139,12 @@ const SkillsSection: React.FC = () => {
 
 const ProjectsSection: React.FC = () => {
   const projectsData = [
-          {
-	text: 'Educational Website',
-      image: setaraImage ,
-      description: 'SetaraKita is an educational web platform dedicated to promoting and raising awareness of gender equality in Indonesia. The site aims to provide a better understanding of the importance of gender equality in various aspects of life.',
-      link: 'https://setarakita.netlify.app/',
-      tech: ['HTML5', 'CSS3', 'Javascript']
+        {
+      text: 'Educational Website',
+        image: setaraImage ,
+        description: 'SetaraKita is an educational web platform dedicated to promoting and raising awareness of gender equality in Indonesia. The site aims to provide a better understanding of the importance of gender equality in various aspects of life.',
+        link: 'https://setarakita.netlify.app/',
+        tech: ['HTML5', 'CSS3', 'Javascript']
     },
     {
       text: 'Lab Website',
@@ -164,7 +169,7 @@ const ProjectsSection: React.FC = () => {
     <>
       <section id="projects" className={styles.projectsSection}>
         <div className="container">
-          <ScrollFloat containerClassName={styles.sectionHeading} ease='power4.out'>
+          <ScrollFloat containerClassName={styles.sectionHeading}>
             Featured Projects
           </ScrollFloat>
           
@@ -285,7 +290,13 @@ const Home: React.FC = () => {
   const buttonVariants = { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 80, damping: 15, duration: 0.8, delay: 1.0 } } };
 
   return (
-    <>
+    <ClickSpark
+      sparkColor="#673ab7"
+      sparkCount={20}
+      sparkRadius={25}
+      duration={600}
+      extraScale={1.2}
+    >
       <section id="home" className={styles.homeSection}>
         <div className="container">
           <motion.div
@@ -327,8 +338,13 @@ const Home: React.FC = () => {
       <EducationTimeline />
       <SkillsSection />
       <ProjectsSection />
+
+      <GameArcadeSection />
+
       <ContactSection />
-    </>
+
+      </ClickSpark>
+
   );
 };
 

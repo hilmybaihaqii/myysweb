@@ -1,5 +1,7 @@
-// src/components/common/Navbar/Navbar.tsx
+// src/components/common/Navbar/Navbar.tsx (Versi Final yang Sadar Halaman)
+
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // DIUBAH: Impor Link dan useLocation
 import styles from './Navbar.module.css';
 import logo from '../../../assets/icons/logo.png';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,13 +9,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  // BARU: State untuk melacak section yang aktif
-  const [activeSection, setActiveSection] = useState<string>('home'); 
+  const [activeSection, setActiveSection] = useState<string>('home');
+  const location = useLocation(); // BARU: Hook untuk mendapatkan info halaman saat ini
 
-  const toggleMenu = () => { setIsOpen(prev => { const newState = !prev; if (newState) { document.body.classList.add('no-scroll'); } else { document.body.classList.remove('no-scroll'); } return newState; }); };
-  const closeMenu = () => { setIsOpen(false); document.body.classList.remove('no-scroll'); };
+  const toggleMenu = () => { setIsOpen(prev => !prev); };
+  const closeMenu = () => { setIsOpen(false); };
+  
+  // Fungsi untuk scroll smooth, dipanggil oleh link
+  const handleScrollTo = (e: React.MouseEvent, id: string) => {
+    // Hanya jalankan scroll-to-view jika kita di halaman utama
+    if (location.pathname === '/') {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      closeMenu();
+    }
+    // Jika di halaman lain dan klik link #home, biarkan Link dari react-router yang bekerja
+  };
 
-  // EFEK UNTUK BACKGROUND NAVBAR SAAT SCROLL (TETAP SAMA)
+  // Efek untuk background navbar saat scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -22,14 +35,21 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // BARU: EFEK UNTUK INTERSECTION OBSERVER
+  // DIUBAH: EFEK UNTUK INTERSECTION OBSERVER YANG SADAR HALAMAN
   useEffect(() => {
+    // Jika kita tidak di halaman utama, reset activeSection dan hentikan proses
+    if (location.pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
     const sections = document.querySelectorAll('section[id]');
+    if (sections.length === 0) return;
 
     const observerOptions = {
-      root: null, // viewport
-      rootMargin: '0px',
-      threshold: 0.6, // 60% dari section harus terlihat
+      root: null,
+      rootMargin: '0px 0px -70% 0px', // Sedikit diubah agar lebih responsif di tengah
+      threshold: 0,
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -41,16 +61,13 @@ const Navbar: React.FC = () => {
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
     sections.forEach(sec => observer.observe(sec));
 
-    // Cleanup function
+    // Cleanup function akan berjalan saat pindah halaman
     return () => {
       sections.forEach(sec => observer.unobserve(sec));
     };
-  }, []); // Jalankan hanya sekali saat komponen dimuat
-
-  // FUNGSI isLinkActive DIHAPUS, KARENA SUDAH TIDAK DIPERLUKAN
+  }, [location.pathname]); // DIUBAH: Jalankan ulang efek ini setiap kali URL berubah
 
   const menuVariants = { hidden: { opacity: 0, y: "-100%" }, visible: { opacity: 1, y: 0, transition: { when: "beforeChildren", staggerChildren: 0.1, delayChildren: 0.2, }, }, };
   const linkVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 }, };
@@ -60,28 +77,29 @@ const Navbar: React.FC = () => {
       <div className={`container ${styles.navContent}`}>
         {/* -- BAGIAN KIRI -- */}
         <div className={styles.navLeft}>
-          <a href="#home" onClick={(e) => { e.preventDefault(); document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' }); closeMenu(); }}>
+          {/* DIUBAH: Gunakan Link untuk navigasi SPA */}
+          <Link to="/#home" onClick={(e) => handleScrollTo(e, 'home')}>
             <img src={logo} alt="My Portfolio Logo" className={styles.logoImage} />
-          </a>
+          </Link>
         </div>
 
-        {/* -- BAGIAN TENGAH (HANYA TAMPIL DI DESKTOP) -- */}
+        {/* -- BAGIAN TENGAH -- */}
         <div className={styles.navCenter}>
           <ul className={styles.navLinks}>
-            {/* DIUBAH: Menggunakan state 'activeSection' */}
-            <li><a href="#home" className={activeSection === 'home' ? styles.activeLink : ''}>Home</a></li>
-            <li><a href="#about" className={activeSection === 'about' ? styles.activeLink : ''}>About</a></li>
-            <li><a href="#skills" className={activeSection === 'skills' ? styles.activeLink : ''}>Skills</a></li>
-            <li><a href="#projects" className={activeSection === 'projects' ? styles.activeLink : ''}>Projects</a></li>
+            <li><Link to="/#home" onClick={(e) => handleScrollTo(e, 'home')} className={activeSection === 'home' ? styles.activeLink : ''}>Home</Link></li>
+            <li><Link to="/#about" onClick={(e) => handleScrollTo(e, 'about')} className={activeSection === 'about' ? styles.activeLink : ''}>About</Link></li>
+            <li><Link to="/#skills" onClick={(e) => handleScrollTo(e, 'skills')} className={activeSection === 'skills' ? styles.activeLink : ''}>Skills</Link></li>
+            <li><Link to="/#projects" onClick={(e) => handleScrollTo(e, 'projects')} className={activeSection === 'projects' ? styles.activeLink : ''}>Projects</Link></li>
+            {/* BARU: Menambahkan kembali link Arcade */}
+            <li><Link to="/games" className={location.pathname === '/games' ? styles.activeLink : ''}>Arcade</Link></li>
           </ul>
         </div>
 
         {/* -- BAGIAN KANAN -- */}
         <div className={styles.navRight}>
           <div className={styles.contactButtonContainer}>
-            <a href="#contact" className={styles.contactLink}>Contact</a>
+             <Link to="/#contact" onClick={(e) => handleScrollTo(e, 'contact')} className={styles.contactLink}>Contact</Link>
           </div>
-        
           <div className={`${styles.hamburger} ${isOpen ? styles.open : ''}`} onClick={toggleMenu}>
             <div className={styles.bar}></div>
             <div className={styles.bar}></div>
@@ -95,13 +113,15 @@ const Navbar: React.FC = () => {
         {isOpen && (
           <motion.div className={styles.mobileNavWrapper} variants={menuVariants} initial="hidden" animate="visible" exit="hidden">
             <motion.ul className={styles.mobileNavLinks}>
-              <motion.li variants={linkVariants}><a href="#home" onClick={closeMenu}>Home</a></motion.li>
-              <motion.li variants={linkVariants}><a href="#about" onClick={closeMenu}>About</a></motion.li>
-              <motion.li variants={linkVariants}><a href="#skills" onClick={closeMenu}>Skills</a></motion.li>
-              <motion.li variants={linkVariants}><a href="#projects" onClick={closeMenu}>Projects</a></motion.li>
+              <motion.li variants={linkVariants}><Link to="/#home" onClick={(e) => handleScrollTo(e, 'home')}>Home</Link></motion.li>
+              <motion.li variants={linkVariants}><Link to="/#about" onClick={(e) => handleScrollTo(e, 'about')}>About</Link></motion.li>
+              <motion.li variants={linkVariants}><Link to="/#skills" onClick={(e) => handleScrollTo(e, 'skills')}>Skills</Link></motion.li>
+              <motion.li variants={linkVariants}><Link to="/#projects" onClick={(e) => handleScrollTo(e, 'projects')}>Projects</Link></motion.li>
+              {/* BARU: Menambahkan kembali link Arcade di mobile */}
+              <motion.li variants={linkVariants}><Link to="/games" onClick={closeMenu}>Arcade</Link></motion.li>
             </motion.ul>
             <motion.div variants={linkVariants} className={styles.mobileContactButton}>
-              <a href="#contact" onClick={closeMenu} className={styles.contactLink}>Contact</a>
+              <Link to="/#contact" onClick={(e) => handleScrollTo(e, 'contact')} className={styles.contactLink}>Contact</Link>
             </motion.div>
           </motion.div>
         )}
