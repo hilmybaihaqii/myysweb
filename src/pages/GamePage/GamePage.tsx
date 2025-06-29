@@ -1,8 +1,8 @@
-// src/pages/GamePage/GamePage.tsx (Versi Final dengan Tipe yang Benar)
+// src/pages/GamePage/GamePage.tsx (Versi dengan Tombol di Bawah)
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, type Variants } from 'framer-motion'; // PERBAIKAN: Impor tipe Variants
+import { motion, type Variants } from 'framer-motion';
 import styles from './GamePage.module.css';
 
 // Impor semua komponen game
@@ -12,8 +12,7 @@ import TerminalGame from '../../components/common/TerminalGame/TerminalGame';
 
 type Game = 'memory' | 'bugsquash' | 'terminal';
 
-// Varian animasi untuk list
-const containerVariants: Variants = { // Beri tipe secara eksplisit
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -23,7 +22,6 @@ const containerVariants: Variants = { // Beri tipe secara eksplisit
   },
 };
 
-// PERBAIKAN: Beri tipe secara eksplisit pada cardVariants
 const cardVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: { 
@@ -56,19 +54,24 @@ const GamePage: React.FC = () => {
     <div className={styles.pageContainer}>
       <div className="container">
         {activeGame ? (
+          // TAMPILAN SAAT GAME AKTIF
           <motion.div 
             className={styles.gameActiveContainer}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <div className={styles.gameHeader}>
+            {/* Game dirender terlebih dahulu */}
+            {renderGame()}
+
+            {/* PERUBAHAN DI SINI: Tombol navigasi dipindahkan ke bawah game */}
+            <div className={styles.gameFooter}>
               <button onClick={() => setActiveGame(null)} className={styles.backButton}>
                 &larr; Choose Another Game
               </button>
             </div>
-            {renderGame()}
           </motion.div>
         ) : (
+          // TAMPILAN PEMILIHAN GAME (TETAP SAMA)
           <div className={styles.selectionContainer}>
             <motion.h1 initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
               Game Arcade
