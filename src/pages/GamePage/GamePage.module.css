@@ -119,10 +119,13 @@
     align-items: center;
 }
 
-.gameHeader {
+/* HAPUS .gameHeader LAMA DAN GANTI DENGAN INI */
+.gameFooter {
     width: 100%;
-    margin-bottom: 2rem;
-    max-width: 800px; /* Samakan dengan lebar game */
+    max-width: 800px; /* Samakan dengan lebar game agar rapi */
+    margin-top: 2rem; /* Beri jarak dari atas (dari komponen game) */
+    display: flex;
+    justify-content: flex-start; /* Posisikan tombol di kiri */
 }
 
 .backButton {
