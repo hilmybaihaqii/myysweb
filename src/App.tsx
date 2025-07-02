@@ -14,7 +14,6 @@ function App() {
 
   const appLayout = (
     <div className="app-container">
-      {/* ... sisa kode layout Anda tidak perlu diubah ... */}
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
         <Particles
           particleColors={['#ffffff', '#ffffff']}

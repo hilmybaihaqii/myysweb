@@ -1,5 +1,3 @@
-/* src/pages/GamePage/GamePage.module.css (Versi Baru yang Lebih Menarik) */
-
 .pageContainer {
   padding: 5rem 0;
   color: white;
@@ -12,7 +10,6 @@
   text-align: center;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  /* Efek teks gradasi */
   background: linear-gradient(90deg, #a77eff, #673ab7, #f472b6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -22,7 +19,7 @@
 .selectionContainer > p {
   text-align: center;
   font-size: 1.2rem;
-  color: #a0aec0; /* Abu-abu kebiruan */
+  color: #a0aec0;
   margin-bottom: 4rem;
 }
 
@@ -33,7 +30,7 @@
 }
 
 .gameCard {
-  background: rgba(255, 255, 255, 0.05); /* Latar belakang transparan */
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
   padding: 2rem;
   display: flex;
@@ -49,13 +46,38 @@
   border-color: rgba(103, 58, 183, 0.5);
 }
 
-.gameCard h2 {
-  margin-top: 0;
-  color: #fff;
-  font-size: 1.8rem;
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   border-bottom: 2px solid #673ab7;
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardTitle h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.gameCard h2 {
+  /* Resetting old styles to avoid conflict */
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.gamePreviewImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .gameCard p {
@@ -65,19 +87,19 @@
 }
 
 .instructions {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-    text-align: left;
-    font-size: 0.9rem;
-    border-left: 3px solid #673ab7;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: left;
+  font-size: 0.9rem;
+  border-left: 3px solid #673ab7;
 }
 
 .instructions strong {
-    color: #fff;
-    display: block;
-    margin-bottom: 0.5rem;
+  color: #fff;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .gameCard button {
@@ -98,47 +120,84 @@
   box-shadow: 0 0 20px rgba(103, 58, 183, 0.7);
 }
 
+.glitch {
+  position: relative;
+  color: white;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(37, 37, 37, 0); /* Sesuaikan dengan background kartu */
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00c1;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #00fff9;
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(45% 0 50% 0); }
+  100% { clip-path: inset(5% 0 80% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(70% 0 15% 0); }
+  100% { clip-path: inset(40% 0 43% 0); }
+}
+
 .backToHome {
-    display: block; /* Ubah menjadi block agar bisa di-center */
-    width: fit-content;
-    margin: 4rem auto 0 auto;
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.2s;
-    font-weight: 500;
+  display: block;
+  width: fit-content;
+  margin: 4rem auto 0 auto;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 500;
 }
 
 .backToHome:hover {
-    color: #673ab7;
+  color: #673ab7;
 }
 
 /* Styling saat game aktif */
 .gameActiveContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* HAPUS .gameHeader LAMA DAN GANTI DENGAN INI */
 .gameFooter {
-    width: 100%;
-    max-width: 800px; /* Samakan dengan lebar game agar rapi */
-    margin-top: 2rem; /* Beri jarak dari atas (dari komponen game) */
-    display: flex;
-    justify-content: flex-start; /* Posisikan tombol di kiri */
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .backButton {
-    background: transparent;
-    border: 1px solid #444;
-    color: #ccc;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s;
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .backButton:hover {
-    background-color: #444;
-    color: white;
+  background-color: #444;
+  color: white;
 }

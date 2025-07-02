@@ -1,71 +1,103 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Bug from './Bug';
-import styles from './Bug SquashGame.module.css';
+import styles from './BugSquashGame.module.css';
+
+// Tipe data baru untuk state bug
+type BugType = {
+  id: number;
+  top: string;
+  left: string;
+  color: string;
+  isSquashed: boolean;
+};
 
 type GameState = 'idle' | 'playing' | 'finished';
 
 // Konfigurasi Game
 const BUG_COLORS = ['#ff4136', '#ff851b', '#f012be', '#0074d9', '#7fdbff', '#2ecc40', '#b10dc9'];
-const BUG_LIFESPAN = 2500; // Bug akan hilang setelah 2.5 detik
-const BUG_SPAWN_RATE = 800; // Bug baru muncul setiap 0.8 detik
-const GAME_DURATION = 30; // Durasi permainan 30 detik
+const BUG_LIFESPAN = 1100;
+const BUG_SPAWN_RATE = 600;
+const GAME_DURATION = 30;
 
 const BugSquashGame: React.FC = () => {
-  const [bugs, setBugs] = useState<{ id: number; top: string; left: string; color: string; spawnTime: number }[]>([]);
+  const [bugs, setBugs] = useState<BugType[]>([]);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION);
   const [gameState, setGameState] = useState<GameState>('idle');
 
+  const gameTimerRef = useRef<number | null>(null);
+  const spawnerRef = useRef<number | null>(null);
+
+  const removeBug = useCallback((id: number) => {
+    setBugs(currentBugs => currentBugs.filter(bug => bug.id !== id));
+  }, []);
+
+  const spawnBug = useCallback(() => {
+    const newBug: BugType = {
+      id: Date.now(),
+      top: `${Math.random() * 92}%`,
+      left: `${Math.random() * 92}%`,
+      color: BUG_COLORS[Math.floor(Math.random() * BUG_COLORS.length)],
+      isSquashed: false, // Nilai awal saat bug baru muncul
+    };
+    setBugs(currentBugs => [...currentBugs, newBug]);
+
+    // Jadwalkan bug hilang jika tidak di-klik
+    setTimeout(() => {
+      removeBug(newBug.id);
+    }, BUG_LIFESPAN);
+  }, [removeBug]);
+
+  const squashBug = (id: number) => {
+    // 1. Tandai bug sebagai 'squashed'
+    setBugs(currentBugs =>
+      currentBugs.map(bug =>
+        bug.id === id ? { ...bug, isSquashed: true } : bug
+      )
+    );
+
+    // 2. Tambah skor
+    setScore(currentScore => currentScore + 1);
+
+    // 3. Hapus bug dari state setelah animasi selesai
+    setTimeout(() => {
+      removeBug(id);
+    }, 300); // Sesuaikan dengan durasi transisi di CSS
+  };
+
+  const cleanup = () => {
+    if (gameTimerRef.current) clearInterval(gameTimerRef.current);
+    if (spawnerRef.current) clearInterval(spawnerRef.current);
+  };
+
   const startGame = () => {
+    cleanup();
     setBugs([]);
     setScore(0);
     setTimeLeft(GAME_DURATION);
     setGameState('playing');
   };
 
-  const spawnBug = useCallback(() => {
-    if (gameState !== 'playing') return;
-    const newBug = {
-      id: Date.now(),
-      top: `${Math.random() * 90}%`,
-      left: `${Math.random() * 90}%`,
-      color: BUG_COLORS[Math.floor(Math.random() * BUG_COLORS.length)],
-      spawnTime: Date.now(),
-    };
-    setBugs((currentBugs) => [...currentBugs, newBug]);
-  }, [gameState]);
-
-  const squashBug = (id: number) => {
-    setBugs((currentBugs) => currentBugs.filter((bug) => bug.id !== id));
-    setScore((currentScore) => currentScore + 1);
-  };
-
   useEffect(() => {
-    if (gameState !== 'playing') return;
-    const timer = setInterval(() => {
-      setTimeLeft((t) => {
-        if (t > 1) return t - 1;
-        setGameState('finished');
-        return 0;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [gameState]);
+    if (gameState === 'playing') {
+      gameTimerRef.current = window.setInterval(() => {
+        setTimeLeft(t => t - 1);
+      }, 1000);
 
-  useEffect(() => {
-    if (gameState !== 'playing') return;
-    const spawner = setInterval(spawnBug, BUG_SPAWN_RATE);
-    return () => clearInterval(spawner);
+      spawnerRef.current = window.setInterval(spawnBug, BUG_SPAWN_RATE);
+    } else {
+      cleanup();
+    }
+
+    return cleanup;
   }, [gameState, spawnBug]);
-  
+
   useEffect(() => {
-    if (gameState !== 'playing') return;
-    const cleaner = setInterval(() => {
-      const now = Date.now();
-      setBugs(currentBugs => currentBugs.filter(bug => now - bug.spawnTime < BUG_LIFESPAN));
-    }, 500);
-    return () => clearInterval(cleaner);
-  }, [gameState]);
+    if (timeLeft <= 0 && gameState === 'playing') {
+      setTimeLeft(0);
+      setGameState('finished');
+    }
+  }, [timeLeft, gameState]);
 
   const renderGameState = () => {
     switch (gameState) {
@@ -78,7 +110,7 @@ const BugSquashGame: React.FC = () => {
           </div>
         );
       case 'playing':
-        return bugs.map((bug) => (
+        return bugs.map(bug => (
           <Bug key={bug.id} {...bug} onSquash={squashBug} />
         ));
       default: // 'idle'

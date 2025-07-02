@@ -7,16 +7,23 @@ interface BugProps {
   top: string;
   left: string;
   color: string;
+  isSquashed: boolean; // <-- Tambahkan properti baru
   onSquash: (id: number) => void;
 }
 
-const Bug: React.FC<BugProps> = ({ id, top, left, color, onSquash }) => {
+const Bug: React.FC<BugProps> = ({ id, top, left, color, isSquashed, onSquash }) => {
   const handleClick = () => {
-    onSquash(id);
+    // Jangan biarkan bug di-klik lagi jika sudah gepeng
+    if (!isSquashed) {
+      onSquash(id);
+    }
   };
 
+  // Tambahkan class 'squashed' jika isSquashed adalah true
+  const bugClassName = `bug ${isSquashed ? 'squashed' : ''}`;
+
   return (
-    <div className="bug" style={{ top, left, color: color }} onClick={handleClick}>
+    <div className={bugClassName} style={{ top, left, color: color }} onClick={handleClick}>
       <FaBug />
     </div>
   );
