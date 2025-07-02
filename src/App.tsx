@@ -1,7 +1,7 @@
 // src/App.tsx (Versi Final dengan perbaikan)
-
+import { Analytics } from '@vercel/analytics/react';
 import { Outlet } from 'react-router-dom';
-import { ReactLenis } from 'lenis/react'; // <-- 1. PERBAIKI BARIS INI
+import { ReactLenis } from 'lenis/react';
 import { useIsMobile } from './hooks/useIsMobile'; 
 
 import Navbar from './components/common/Navbar/Navbar';
@@ -52,6 +52,7 @@ function App() {
           {appLayout}
         </ReactLenis>
       )}
+      <Analytics />
     </>
   );
 }
